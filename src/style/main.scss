@@ -1,0 +1,29 @@
+@import "_nav.scss";
+@import "_apps.scss";
+
+body {
+  text-align: center;
+  color: #222;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+.empty-cell {
+  height: 300px;
+  text-align: center;
+  line-height: 300px;
+}
+
+.md-table {
+  td {
+    white-space: nowrap;
+  }
+}
+
+.md-button-sm {
+  min-width: 60px !important;
+  min-height: 25px !important;
+  line-height: 30px !important;
+}

@@ -1,0 +1,32 @@
+<md-content layout="column" layout-padding layout-align="start center"
+            style="width:100%; height:100%; min-height: 500px;" md-colors="{background: 'primary'}">
+    <md-card style="min-width: 300px; width: 40%; margin-top: 100px;">
+        <md-content layout="column" layout-padding
+                    layout-align="center center">
+            <h5>红舞管理后台</h5>
+        </md-content>
+        <!-- <div role="alert">登录失败</div> -->
+        <form name="loginForm">
+            <md-input-container class="md-block">
+                <label>用户名</label>
+                <input required type="text" name="username" ng-model="user.username"/>
+                <div ng-messages="loginForm.username.$error" multiple md-auto-hide="true">
+                    <div ng-message="required">
+                        输入你的用户名
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>密码</label>
+                <input required type="password" name="password" ng-model="user.password"/>
+                <div ng-messages="loginForm.password.$error" multiple md-auto-hide="true">
+                    <div ng-message="required">
+                        输入你的密码
+                    </div>
+                </div>
+            </md-input-container>
+            <md-button type="submit" class="md-raised md-primary" style="width: 95%;" ng-click="login()">登陆</md-button>
+        </form>
+    </md-card>
+
+</md-content>

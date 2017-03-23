@@ -1,0 +1,48 @@
+<md-dialog aria-label="用户设置" style="width: 50%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>用户设置</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" layout="column">
+                <md-input-container class="md-block" style="margin:10px 0">
+                    <label>登录名</label>
+                    <input ng-model="updateData.loginName">
+                </md-input-container>
+                <md-input-container class="md-block" style="margin:10px 0">
+                    <label>密码</label>
+                    <input ng-model="updateData.plainPassword">
+                </md-input-container>
+                <md-input-container class="md-block" style="margin:10px 0">
+                    <label>姓名</label>
+                    <input ng-model="updateData.name">
+                </md-input-container>
+                <md-input-container class="md-block" style="margin:10px 0">
+                    <label>邮箱</label>
+                    <input ng-model="updateData.email">
+                </md-input-container>
+                <md-input-container class="md-block" style="margin:10px 0">
+                    <label>手机</label>
+                    <input ng-model="updateData.mobile">
+                </md-input-container>
+                <md-input-container class="md-block" style="margin:10px 0">
+                    <label>电话</label>
+                    <input ng-model="updateData.phone">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+
+            <md-button ng-click="cancel()">
+                取消
+            </md-button>
+            <md-button class="md-primary" ng-click="submit()">
+                提交
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

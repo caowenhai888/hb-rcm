@@ -1,0 +1,107 @@
+<div>
+    <!-- 表格 -->
+    <md-content layout-padding layout-wrap layout="column">
+        <md-card>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <span>提现设置</span>
+                </div>
+                <div>
+                    <md-button
+                            class="md-raised md-primary md-button-sm" style="color: #fff;float: left"
+                            ng-click="showCreateDialog()">
+                        创建配置
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-progress-linear md-mode="indeterminate" ng-show="isLoading"></md-progress-linear>
+            <md-table-container>
+                <table md-table md-progress="promise">
+                    <thead md-head>
+                    <tr md-row>
+                        <th md-column md-numeric>
+                            <span>序号</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>提现选项</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>每月提现次数</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>每月提现金额限额（元）</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>每日提现次数</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>每次提现金额限额（元）</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>操作时间</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>状态</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>操作</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row ng-repeat="data in pageData.list">
+                        <td md-cell>
+                            {{$index}}
+                        </td>
+                        <td md-cell>
+                            {{data.configProject}}
+                        </td>
+                        <td md-cell>
+                            {{data.monthWithdrawNum}}
+                        </td>
+                        <td md-cell>
+                            {{data.monthWithdrawAmount / 100}}
+                        </td>
+                        <td md-cell>
+                            {{data.dayWithdrawNum}}
+                        </td>
+                        <td md-cell>
+                            {{data.dayWithdrawAmount /100}}
+                        </td>
+                        <td md-cell>
+                            {{data.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                        </td>
+                        <td md-cell>
+                            {{data.enable ?'启用':'禁用'}}
+                        </td>
+                        <td md-cell>
+                            <md-button
+                                    class="md-raised md-primary md-button-sm "
+                                    ng-click="showUpdateDialog(data)">
+                                修改
+                            </md-button>
+                            <md-button
+                                    ng-class="{0:'md-raised md-primary md-button-sm',1:'md-raised md-warn md-button-sm'}[data.enable]"
+                                    ng-click="disableConfig(data)">
+                                {{data.enable ?'停用':'启用'}}
+                            </md-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <div ng-show="pageData.list.length === 0" class="empty-cell">
+                无记录
+            </div>
+            <md-table-pagination md-limit="searchOptions.count"
+                                 md-limit-options="[10]"
+                                 md-page="searchOptions.page"
+                                 md-total="{{pageData.totalElements}}"
+                                 md-on-paginate="getPageData"
+                                 md-label="{page: '页:', rowsPerPage: '每页条数', of: '共'}"
+                                 md-page-select></md-table-pagination>
+
+        </md-card>
+    </md-content>
+</div>
+

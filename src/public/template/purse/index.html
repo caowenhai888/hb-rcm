@@ -1,0 +1,154 @@
+<div>
+    <!-- 表格 -->
+    <md-content layout-padding layout-wrap layout="column">
+        <md-card>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <span>零钱交易记录</span>
+                </div>
+                <div layout="row" layout-align="start center" layout-padding>
+                    <md-datepicker ng-model="searchOptions.search_startTime"
+                                   md-placeholder="开始时间"
+                                   md-hide-icons="all"
+                                   md-open-on-focus="true"
+                                   ng-required="false"
+                                   md-max-date="searchOptions.search_endTime"
+                                   style="margin-right: 10px;">
+                    </md-datepicker>
+                    <md-datepicker ng-model="searchOptions.search_endTime"
+                                   md-placeholder="结束时间"
+                                   md-hide-icons="all"
+                                   md-open-on-focus="true"
+                                   ng-required="false"
+                                   md-min-date="searchOptions.search_startTime">
+                    </md-datepicker>
+                </div>
+                <div layout="row" layout-align="start center" layout-padding>
+                    <md-input-container>
+                        <label>姓名</label>
+                        <input ng-model="searchOptions.search_userName">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>昵称</label>
+                        <input ng-model="searchOptions.search_nickName">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>手机号</label>
+                        <input ng-model="searchOptions.search_telephone">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>类型</label>
+                        <md-select ng-model="searchOptions.search_status">
+                            <md-option value="">
+                                全部
+                            </md-option>
+                            <md-option value="1">
+                                提现到微信
+                            </md-option>
+                            <md-option value="2">
+                                充值
+                            </md-option>
+                            <md-option value="3">
+                                发红包
+                            </md-option>
+                            <md-option value="4">
+                                抢红包
+                            </md-option>
+                            <md-option value="5">
+                                购物
+                            </md-option>
+                            <md-option value="6">
+                                退款
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-button class="md-raised md-primary md-button-sm"
+                                   style="color:#fff;height: 30px;margin-bottom: 5px; width: 55px;"
+                                   ng-click="getPageData()">
+                            查询
+                        </md-button>
+                        <md-button class="md-raised md-primary md-button-sm"
+                                   style="color:#fff;height: 30px;margin-bottom: 5px;width: 55px;" ng-click="clear()">
+                            清除
+                        </md-button>
+                    </div>
+                </div>
+            </md-toolbar>
+            <md-progress-linear md-mode="indeterminate" ng-show="isLoading"></md-progress-linear>
+            <md-table-container>
+                <table md-table md-progress="promise">
+                    <thead md-head>
+                    <tr md-row>
+                        <th md-column md-numeric>
+                            <span>序号</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>用户昵称</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>用户姓名</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>用户手机号</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>类型</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>金额（元）</span>
+                        </th>
+                        <th md-column md-numeric>
+                            <span>时间</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row ng-repeat="data in pageData.list">
+                        <td md-cell>
+                            {{$index}}
+                        </td>
+                        <td md-cell>
+                            {{data.nickName}}
+                        </td>
+                        <td md-cell>
+                            {{data.userName}}
+                        </td>
+                        <td md-cell>
+                            {{data.telphone}}
+                        </td>
+                        <td md-cell>
+                            {{data.type | purseTypeFilter}}
+                        </td>
+                        <td md-cell>
+                            {{data.money /100}}
+                        </td>
+                        <td md-cell>
+                            {{data.time | date:'yyyy-MM-dd HH:mm:ss'}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <div ng-show="pageData.list.length === 0" class="empty-cell">
+                无记录
+            </div>
+            <md-table-pagination
+                    md-limit="searchOptions.count"
+                    md-limit-options="[10]"
+                    md-page="searchOptions.page"
+                    md-total="{{pageData.totalElements}}"
+                    md-on-paginate="getPageData"
+                    md-label="{page: '页:', rowsPerPage: '每页条数', of: '共'}"
+                    md-page-select></md-table-pagination>
+            <div style="position: absolute;bottom: 5px;left :20px">
+                <md-input-container style="width: 80px;">
+                    <label>页码</label>
+                    <input ng-model="searchOptions.page">
+                </md-input-container>
+                <md-button class="md-raised md-primary md-button-sm" ng-click="getPageData()">跳转</md-button>
+            </div>
+        </md-card>
+    </md-content>
+</div>
+
